@@ -117,7 +117,11 @@ function resetGame() {
 //compare variables and output win/lose message
 <<<<<<< HEAD
 //reset computer and player choice
+<<<<<<< HEAD
 =======
 //reset computer and player choice
 //testing commits
 >>>>>>> 4659884 (please work)
+=======
+//git test
+>>>>>>> 872514c (testing)
