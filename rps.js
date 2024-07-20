@@ -25,6 +25,10 @@ function getComputerChoice() {
 function getPlayerChoice() {
     const playerInput = guessField.value;
     const playerChoice = playerInput.toLowerCase();
+    if (playerChoice !== 'rock' && 'paper' && 'scissors') {
+        currentResult.textContent = 'Not a valid entry';
+        return;
+    }
     console.log(playerChoice);
     playerInput.value = '';
     let computerRps = getComputerChoice();
@@ -78,10 +82,10 @@ function singleRound(playerChoice, computerRps) {
 guessSubmit.addEventListener('click', getPlayerChoice);
 
 function checkEnd() {
-    if (wins === 3) {
+    if (wins === 5) {
         endGame.textContent = ' YOU WIN!!';
         setGameOver();
-    } else if (losses === 3) {
+    } else if (losses === 5) {
         endGame.textContent = ' YOU LOSE!!';
         setGameOver();
     } else {
@@ -92,6 +96,9 @@ function checkEnd() {
 function setGameOver() {
     guessSubmit.disabled = true;
     guessField.disabled = true;
+    rockButton.disabled = true;
+    paperButton.disabled = true;
+    scissorsButton.disabled = true;
     resetButton = document.createElement('button');
     resetButton.textContent = 'Start New Game';
     document.body.appendChild(resetButton);
@@ -103,6 +110,9 @@ function resetGame() {
     losses = 0;
     guessSubmit.disabled = false;
     guessField.disabled = false;
+    rockButton.disabled = false;
+    paperButton.disabled = false;
+    scissorsButton.disabled = false;
     currentResult.textContent = '';
     currentScore.textContent = wins + ' wins ' + losses + ' losses';
     endGame.textContent = '';
@@ -110,6 +120,24 @@ function resetGame() {
     guessField.focus();
     resetButton.parentNode.removeChild(resetButton);
 };
+
+const rockButton = document.querySelector('.rbtn');
+const paperButton = document.querySelector('.pbtn');
+const scissorsButton = document.querySelector('.sbtn');
+const button = document.querySelectorAll('button').forEach((button) => {
+    button.addEventListener('click', getPlayerChoiceButton);
+});
+
+function getPlayerChoiceButton(event) {
+    let playerClick = event.target.innerText;
+    let playerChoice = playerClick.toLowerCase();
+    let computerRps = getComputerChoice();
+    console.log(playerChoice);
+    console.log(computerRps);
+    currentResult.textContent = singleRound(playerChoice, computerRps);
+}
+
+
 
 
 //get computer choice and store to variable
